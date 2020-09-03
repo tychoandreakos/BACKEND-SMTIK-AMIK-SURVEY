@@ -4,7 +4,6 @@ const port = 8000;
 const db = require("./Configuration");
 
 const Router = require("./Router");
-
 db;
 
 app.use([Router]);

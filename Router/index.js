@@ -10,6 +10,7 @@ const TestingController = require("../App/Controllers/Testing");
  * Define the routes
  */
 routes.get("/", TestingController.index);
+routes.get("/store", TestingController.store);
 
 /**
  * Export the routes

@@ -4,8 +4,12 @@
  */
 let mongoose = require("mongoose");
 
-const uri =
-  "mongodb+srv://danieka12:Elangindra12@survey-amik.cudnc.mongodb.net/survey-stmik-amik?retryWrites=true&w=majority";
+// const uri =
+//   "mongodb+srv://danieka12:Elangindra12@survey-amik.cudnc.mongodb.net/survey-stmik-amik?retryWrites=true&w=majority";
+
+const server = "127.0.0.1:27017";
+const database = "survey-stmik";
+const localUri = `mongodb://${server}/${database}`;
 
 class Database {
   constructor() {
@@ -14,7 +18,7 @@ class Database {
 
   _connect() {
     mongoose
-      .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+      .connect(localUri, { useNewUrlParser: true, useUnifiedTopology: true })
       .then(() => {
         console.log("Database connection successful");
       })
