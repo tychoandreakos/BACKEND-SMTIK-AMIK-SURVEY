@@ -43,24 +43,52 @@ const schema = new mongoose.Schema({
         return validator.isLength(val.configuration.lengthVal).trim(val);
       },
     },
-    surveyQuestion: {
-      title: {
-        type: String,
-        required: true,
-        lowercase: true,
-        validate: (val) => {
-          return validator.isLength(val.configuration.lengthVal).trim(val);
-        },
+    surveyCategoryBuilder: {
+      icon: {
+        body: String,
+        width: Number,
+        height: Number,
       },
-      typeQuestion: {
-        type: String,
-        required: true,
-        lowercase: true,
-        validate: (val) => {
-          return validator.isLength(val.configuration.lengthVal).trim(val);
-        },
-      },
+      title: String,
+      active: Boolean,
+      current: Boolean,
     },
+    surveyQuestion: [
+      {
+        title: {
+          type: String,
+          required: true,
+          lowercase: true,
+          validate: (val) => {
+            return validator.isLength(val.configuration.lengthVal).trim(val);
+          },
+        },
+        typeQuestion: {
+          type: String,
+          required: true,
+          lowercase: true,
+          validate: (val) => {
+            return validator.isLength(val.configuration.lengthVal).trim(val);
+          },
+        },
+        item: [
+          {
+            title: {
+              type: String,
+              required: true,
+              lowercase: true,
+              validate: (val) => {
+                return validator
+                  .isLength(val.configuration.lengthVal)
+                  .trim(val);
+              },
+            },
+            selected: Boolean,
+          },
+        ],
+        date: Date,
+      },
+    ],
   },
   date: {
     type: Date,
