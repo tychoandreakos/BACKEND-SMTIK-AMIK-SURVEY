@@ -16,6 +16,7 @@ routes.get("/store", TestingController.store);
 /**
  * Survey Manager Routes
  */
+routes.get("/survey", SurveyController.index);
 routes.get("/survey/store", SurveyController.store);
 
 /**

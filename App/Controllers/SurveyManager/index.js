@@ -1,9 +1,18 @@
 const SurveyModel = require("../../Model/Survey");
 
-exports.index = (req, res) => {
-  res.json({
-    name: "damn",
-  });
+exports.index = async (req, res) => {
+  try {
+    const data = await SurveyModel.find();
+    res.json({
+      success: true,
+      data,
+    });
+  } catch (err) {
+    res.json({
+      success: false,
+      data: err,
+    });
+  }
 };
 
 exports.store = async (req, res) => {
