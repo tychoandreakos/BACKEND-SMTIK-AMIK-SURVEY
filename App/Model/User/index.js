@@ -40,6 +40,33 @@ const schema = new mongoose.Schema({
       return validator.trim(val).isLength(val, configuration.lengthVal);
     },
   },
+  image: String,
+  jk: String,
+  name: {
+    type: String,
+    required: true,
+    lowercase: true,
+    validate: (val) => {
+      return validator.trim(val).isLength(val, configuration.lengthVal);
+    },
+    address: String,
+    phone: {
+      type: Number,
+      validate: (val) => {
+        return validator
+          .trim(val)
+          .isLength(val, configuration.lengthVal)
+          .isNumeric(val);
+      },
+    },
+    date: {
+      type: Date,
+      required: true,
+      validate: (val) => {
+        return validator.isDate(val).isLength(val, configuration.lengthVal);
+      },
+    },
+  },
 });
 
 module.exports = mongoose.model("User", schema);
