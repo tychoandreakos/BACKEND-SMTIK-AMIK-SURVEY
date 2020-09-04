@@ -4,40 +4,69 @@ const validator = require("validator");
 const configuration = {
   lengthVal: {
     min: 8,
-    max: undefined,
+    max: 255,
   },
 };
 
 const schema = new mongoose.Schema({
-  username: {
+  title: {
     type: String,
     required: true,
-    unique: true,
     lowercase: true,
     validate: (val) => {
-      return validator
-        .isLength(val, configuration.lengthVal)
-        .isLowerCase()
-        .trim(val)
-        .escape(input);
+      return validator.isLength(val.configuration.lengthVal).trim(val);
     },
   },
-  email: {
+  logo: String,
+  category: {
     type: String,
     required: true,
-    unique: true,
     lowercase: true,
     validate: (val) => {
-      return validator.isEmail(val).isLength(val, configuration.lengthVal);
+      return validator.isLength(val.configuration.lengthVal).trim(val);
     },
   },
-  password: {
-    type: String,
+  surveyForm: {
+    title: {
+      type: String,
+      required: true,
+      lowercase: true,
+      validate: (val) => {
+        return validator.isLength(val.configuration.lengthVal).trim(val);
+      },
+    },
+    description: {
+      type: String,
+      required: true,
+      lowercase: true,
+      validate: (val) => {
+        return validator.isLength(val.configuration.lengthVal).trim(val);
+      },
+    },
+    surveyQuestion: {
+      title: {
+        type: String,
+        required: true,
+        lowercase: true,
+        validate: (val) => {
+          return validator.isLength(val.configuration.lengthVal).trim(val);
+        },
+      },
+      typeQuestion: {
+        type: String,
+        required: true,
+        lowercase: true,
+        validate: (val) => {
+          return validator.isLength(val.configuration.lengthVal).trim(val);
+        },
+      },
+    },
+  },
+  date: {
+    type: Date,
     required: true,
-    unique: false,
-    lowercase: false,
     validate: (val) => {
-      return validator.trim(val).isLength(val, configuration.lengthVal);
+      return validator.isDate(val).isLength(val, configuration.lengthVal);
     },
   },
 });

@@ -19,7 +19,7 @@ const schema = new mongoose.Schema({
         .isLength(val, configuration.lengthVal)
         .isLowerCase()
         .trim(val)
-        .escape(input);
+        .escape(val);
     },
   },
   email: {
