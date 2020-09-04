@@ -13,6 +13,6 @@ var corsOptions = {
 const Router = require("./Router");
 db;
 
-app.use([Router, bodyParser.json(), cors(corsOptions)]);
+app.use([cors(corsOptions), Router, bodyParser.json()]);
 
 app.listen(port, () => console.log(`Connected to port ${port}`));
