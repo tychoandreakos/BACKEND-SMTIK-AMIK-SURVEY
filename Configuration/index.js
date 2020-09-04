@@ -18,7 +18,11 @@ class Database {
 
   _connect() {
     mongoose
-      .connect(localUri, { useNewUrlParser: true, useUnifiedTopology: true })
+      .connect(localUri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+      })
       .then(() => {
         console.log("Database connection successful");
       })

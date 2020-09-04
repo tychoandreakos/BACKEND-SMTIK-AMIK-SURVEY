@@ -6,6 +6,14 @@ const configuration = {
     min: 8,
     max: 255,
   },
+  lengthCategory: {
+    min: 3,
+    max: 255,
+  },
+  lengthTypeQuestion: {
+    min: 3,
+    max: 255,
+  },
 };
 
 const schema = new mongoose.Schema({
@@ -14,7 +22,7 @@ const schema = new mongoose.Schema({
     required: true,
     lowercase: true,
     validate: (val) => {
-      return validator.isLength(val.configuration.lengthVal).trim(val);
+      return validator.isLength(val, configuration.lengthVal);
     },
   },
   logo: String,
@@ -23,7 +31,7 @@ const schema = new mongoose.Schema({
     required: true,
     lowercase: true,
     validate: (val) => {
-      return validator.isLength(val.configuration.lengthVal).trim(val);
+      return validator.isLength(val, configuration.lengthCategory);
     },
   },
   surveyForm: {
@@ -32,7 +40,7 @@ const schema = new mongoose.Schema({
       required: true,
       lowercase: true,
       validate: (val) => {
-        return validator.isLength(val.configuration.lengthVal).trim(val);
+        return validator.isLength(val, configuration.lengthVal);
       },
     },
     description: {
@@ -40,7 +48,7 @@ const schema = new mongoose.Schema({
       required: true,
       lowercase: true,
       validate: (val) => {
-        return validator.isLength(val.configuration.lengthVal).trim(val);
+        return validator.isLength(val, configuration.lengthVal);
       },
     },
     surveyCategoryBuilder: {
@@ -60,7 +68,7 @@ const schema = new mongoose.Schema({
           required: true,
           lowercase: true,
           validate: (val) => {
-            return validator.isLength(val.configuration.lengthVal).trim(val);
+            return validator.isLength(val, configuration.lengthVal);
           },
         },
         typeQuestion: {
@@ -68,7 +76,7 @@ const schema = new mongoose.Schema({
           required: true,
           lowercase: true,
           validate: (val) => {
-            return validator.isLength(val.configuration.lengthVal).trim(val);
+            return validator.isLength(val, configuration.lengthTypeQuestion);
           },
         },
         item: [
@@ -78,24 +86,22 @@ const schema = new mongoose.Schema({
               required: true,
               lowercase: true,
               validate: (val) => {
-                return validator
-                  .isLength(val.configuration.lengthVal)
-                  .trim(val);
+                return validator.isLength(val, configuration.lengthVal);
               },
             },
             selected: Boolean,
+            date: {
+              type: Date,
+              required: true,
+            },
           },
         ],
-        date: Date,
       },
     ],
   },
   date: {
     type: Date,
     required: true,
-    validate: (val) => {
-      return validator.isDate(val).isLength(val, configuration.lengthVal);
-    },
   },
 });
 
