@@ -99,6 +99,10 @@ const schema = new mongoose.Schema({
       },
     ],
   },
+  status: {
+    type: String,
+    required: true,
+  },
   date: {
     type: Date,
     required: true,
