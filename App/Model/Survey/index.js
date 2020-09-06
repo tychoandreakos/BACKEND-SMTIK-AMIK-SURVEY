@@ -103,7 +103,11 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  date: {
+  createdAt: {
+    type: Date,
+    required: true,
+  },
+  updatedAt: {
     type: Date,
     required: true,
   },

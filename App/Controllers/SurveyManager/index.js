@@ -2,7 +2,9 @@ const SurveyModel = require("../../Model/Survey");
 
 exports.index = async (req, res) => {
   try {
-    const data = await SurveyModel.find();
+    const data = await SurveyModel.find({}, { surveyForm: 0 })
+      .limit(5)
+      .sort({ date: -1 });
     res.json({
       success: true,
       message: "Success fetching database!",
@@ -21,7 +23,7 @@ exports.index = async (req, res) => {
 
 exports.store = async (req, res) => {
   const data = {
-    title: "survey claim sepedah motor",
+    title: "kinerja dosen",
     logo: "sdakdka.jpg",
     category: "love",
     surveyForm: {
@@ -66,7 +68,8 @@ exports.store = async (req, res) => {
       ],
     },
     status: false,
-    date: new Date(),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   };
 
   try {
