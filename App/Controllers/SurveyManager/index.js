@@ -24,6 +24,22 @@ exports.index = async (req, res) => {
   }
 };
 
+exports.destroy = async (req, res) => {
+  try {
+    res.json({
+      success: false,
+      time: new Date().toISOString(),
+      data: req.body,
+    });
+  } catch (err) {
+    res.json({
+      success: false,
+      time: new Date().toISOString(),
+      data: err,
+    });
+  }
+};
+
 exports.store = async (req, res) => {
   const {
     SURVEY_TITLE,
