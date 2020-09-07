@@ -25,11 +25,13 @@ exports.index = async (req, res) => {
 };
 
 exports.destroy = async (req, res) => {
+  const _id = req.params.id;
+  const data = await SurveyModel.find({ _id });
   try {
     res.json({
-      success: false,
+      success: true,
       time: new Date().toISOString(),
-      data: req.body,
+      data: data,
     });
   } catch (err) {
     res.json({

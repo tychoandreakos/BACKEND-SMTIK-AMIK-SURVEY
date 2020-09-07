@@ -18,7 +18,7 @@ routes.get("/store", TestingController.store);
  */
 routes.get("/survey", SurveyController.index);
 routes.post("/survey", SurveyController.store);
-routes.delete("/survey", SurveyController.destroy);
+routes.delete("/survey/:id", SurveyController.destroy);
 
 /**
  * Export the routes
