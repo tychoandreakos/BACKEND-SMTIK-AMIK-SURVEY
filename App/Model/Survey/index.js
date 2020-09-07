@@ -26,14 +26,6 @@ const schema = new mongoose.Schema({
     },
   },
   logo: String,
-  category: {
-    type: String,
-    required: true,
-    lowercase: true,
-    validate: (val) => {
-      return validator.isLength(val, configuration.lengthCategory);
-    },
-  },
   surveyForm: {
     title: {
       type: String,
@@ -52,6 +44,10 @@ const schema = new mongoose.Schema({
       },
     },
     surveyCategoryBuilder: {
+      _id: {
+        type: String,
+        required: true,
+      },
       icon: {
         body: String,
         width: Number,
@@ -63,6 +59,10 @@ const schema = new mongoose.Schema({
     },
     surveyQuestion: [
       {
+        _id: {
+          type: String,
+          required: true,
+        },
         title: {
           type: String,
           required: true,
@@ -71,10 +71,9 @@ const schema = new mongoose.Schema({
             return validator.isLength(val, configuration.lengthVal);
           },
         },
-        typeQuestion: {
+        type: {
           type: String,
           required: true,
-          lowercase: true,
           validate: (val) => {
             return validator.isLength(val, configuration.lengthTypeQuestion);
           },
@@ -83,24 +82,28 @@ const schema = new mongoose.Schema({
           {
             title: {
               type: String,
-              required: true,
+              required: false,
               lowercase: true,
               validate: (val) => {
                 return validator.isLength(val, configuration.lengthVal);
               },
             },
             selected: Boolean,
-            date: {
-              type: Date,
-              required: true,
-            },
           },
         ],
+        createdAt: {
+          type: Date,
+          required: false,
+        },
+        modifiedAt: {
+          type: Date,
+          required: false,
+        },
       },
     ],
   },
   status: {
-    type: String,
+    type: Boolean,
     required: true,
   },
   createdAt: {

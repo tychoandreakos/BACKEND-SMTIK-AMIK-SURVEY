@@ -19,53 +19,33 @@ exports.index = async (req, res) => {
       data: err,
     });
   }
+  d;
 };
 
 exports.store = async (req, res) => {
+  const {
+    SURVEY_TITLE,
+    SURVEY_LOGO,
+    SURVEY_HEADER_TITLE,
+    SURVEY_HEADER_DESC,
+    SURVEY_CATEGORY_BUILDER,
+    SURVEY_FORM_QUESTION,
+  } = req.body;
+
   const data = {
-    title: "kinerja dosen",
-    logo: "sdakdka.jpg",
-    category: "love",
+    title: SURVEY_TITLE,
+    logo: SURVEY_LOGO,
     surveyForm: {
-      title: "damn you stark",
-      description: "despacito",
+      title: SURVEY_HEADER_TITLE,
+      description: SURVEY_HEADER_DESC,
       surveyCategoryBuilder: {
-        icon: {
-          body: "asdsaa",
-          width: 25,
-          height: 25,
-        },
-        title: "love",
-        active: true,
-        current: true,
+        _id: SURVEY_CATEGORY_BUILDER._id,
+        icon: SURVEY_CATEGORY_BUILDER.icon,
+        title: SURVEY_CATEGORY_BUILDER.title,
+        active: SURVEY_CATEGORY_BUILDER.active,
+        current: SURVEY_CATEGORY_BUILDER.current,
       },
-      surveyQuestion: [
-        {
-          title: "sarap lo",
-          typeQuestion: "single",
-        },
-        {
-          title: "damn you stark",
-          typeQuestion: "multiple",
-          item: [
-            {
-              title: "damn you stark",
-              selected: false,
-              date: new Date(),
-            },
-            {
-              title: "damn you stark",
-              selected: false,
-              date: new Date(),
-            },
-            {
-              title: "damn you stark",
-              selected: false,
-              date: new Date(),
-            },
-          ],
-        },
-      ],
+      surveyQuestion: SURVEY_FORM_QUESTION,
     },
     status: false,
     createdAt: new Date().toISOString(),
