@@ -26,7 +26,7 @@ exports.index = async (req, res) => {
 
 exports.destroy = async (req, res) => {
   const _id = req.params.id;
-  const data = await SurveyModel.find({ _id });
+  const data = await SurveyModel.deleteOne({ _id });
   try {
     res.json({
       success: true,
