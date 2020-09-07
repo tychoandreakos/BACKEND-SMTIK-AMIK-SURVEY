@@ -5,10 +5,12 @@ exports.index = async (req, res) => {
     const data = await SurveyModel.find({}, { surveyForm: 0 })
       .limit(5)
       .sort({ date: -1 });
+    const total = await SurveyModel.find().count();
     res.json({
       success: true,
       message: "Success fetching database!",
       time: new Date().toISOString(),
+      total,
       data,
     });
   } catch (err) {
@@ -16,10 +18,10 @@ exports.index = async (req, res) => {
       success: false,
       time: new Date().toISOString(),
       message: "Whoops, failed fetching database!",
+      total,
       data: err,
     });
   }
-  d;
 };
 
 exports.store = async (req, res) => {
