@@ -20,6 +20,7 @@ routes.get("/survey", SurveyController.index);
 routes.post("/survey", SurveyController.store);
 routes.delete("/survey/:id", SurveyController.destroy);
 routes.get("/survey/:id", SurveyController.edit);
+routes.post("/survey/update", SurveyController.update);
 /**
  * Export the routes
  */
