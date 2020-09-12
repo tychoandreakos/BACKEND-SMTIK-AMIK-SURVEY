@@ -2,10 +2,17 @@ const SurveyModel = require("../../Model/Survey");
 
 exports.index = async (req, res) => {
   try {
-    const data = await SurveyModel.find({}, { surveyForm: 0 })
+    const data = await SurveyModel.find(
+      {},
+      {
+        "surveyForm.title": 0,
+        "surveyForm.description": 0,
+        "surveyForm.surveyCategoryBuilder": 0,
+      }
+    )
       .limit(5)
       .sort({ date: -1 });
-    const total = await SurveyModel.find().count();
+    const total = await SurveyModel.find().countDocuments();
     res.json({
       success: true,
       message: "Success fetching database!",
