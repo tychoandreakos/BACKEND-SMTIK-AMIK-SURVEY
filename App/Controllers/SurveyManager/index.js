@@ -31,6 +31,24 @@ exports.index = async (req, res) => {
   }
 };
 
+exports.edit = async (req, res) => {
+  const _id = req.params.id;
+  const data = await SurveyModel.findOne({ _id });
+  try {
+    res.json({
+      success: true,
+      time: new Date().toISOString(),
+      data: data,
+    });
+  } catch (err) {
+    res.json({
+      success: false,
+      time: new Date().toISOString(),
+      data: err,
+    });
+  }
+};
+
 exports.destroy = async (req, res) => {
   const _id = req.params.id;
   const data = await SurveyModel.deleteOne({ _id });
