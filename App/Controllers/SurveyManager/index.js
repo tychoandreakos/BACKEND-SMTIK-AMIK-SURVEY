@@ -61,7 +61,7 @@ exports.update = async (req, res) => {
   };
 
   try {
-    const sendDb = await SurveyModel.updateOne({ _id }, { $set: data });
+    await SurveyModel.updateOne({ _id }, { $set: data });
     res.json({
       success: true,
       time: new Date().toISOString(),

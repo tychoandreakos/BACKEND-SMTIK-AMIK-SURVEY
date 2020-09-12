@@ -6,6 +6,10 @@ const configuration = {
     min: 8,
     max: 255,
   },
+  lengthItem: {
+    min: 5,
+    max: 255,
+  },
   lengthCategory: {
     min: 3,
     max: 255,
@@ -80,12 +84,13 @@ const schema = new mongoose.Schema({
         },
         item: [
           {
+            _id: String,
             title: {
               type: String,
               required: false,
               lowercase: true,
               validate: (val) => {
-                return validator.isLength(val, configuration.lengthVal);
+                return validator.isLength(val, configuration.lengthItem);
               },
             },
             selected: Boolean,
