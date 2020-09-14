@@ -54,14 +54,18 @@ exports.imageProcessing = async (req, res) => {
       res.json({
         success: true,
         message: saved,
-        data: filename,
+        data: {
+          image: filename + ".jpg",
+        },
       });
     } catch (err) {
       res.json({
         success: false,
         time: new Date().toISOString(),
         message: "Whoops, failed save image!",
-        data: err,
+        data: {
+          image: err,
+        },
       });
     }
   });
