@@ -13,7 +13,7 @@ exports.index = async (req, res) => {
       }
     )
       .limit(5)
-      .sort({ date: -1 });
+      .sort({ createdAt: -1 });
     const total = await SurveyModel.find().countDocuments();
     res.json({
       success: true,
@@ -42,25 +42,29 @@ exports.imageProcessing = async (req, res) => {
 
   base64.base64decoder(imageData, options, function (err, saved) {
     if (err) {
-      console.log(err);
+      res.json({
+        success: false,
+        time: new Date().toISOString(),
+        message: "Whoops, failed save image!",
+        data: err,
+      });
     }
-    console.log(saved);
-  });
 
-  try {
-    res.json({
-      success: true,
-      message: "Success fetching database!",
-      data: filename,
-    });
-  } catch (err) {
-    res.json({
-      success: false,
-      time: new Date().toISOString(),
-      message: "Whoops, failed fetching database!",
-      data: err,
-    });
-  }
+    try {
+      res.json({
+        success: true,
+        message: saved,
+        data: filename,
+      });
+    } catch (err) {
+      res.json({
+        success: false,
+        time: new Date().toISOString(),
+        message: "Whoops, failed save image!",
+        data: err,
+      });
+    }
+  });
 };
 
 exports.update = async (req, res) => {
