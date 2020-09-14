@@ -1,4 +1,6 @@
 const SurveyModel = require("../../Model/Survey");
+const base64 = require("base64image");
+const stringRandom = require("randomstring");
 
 exports.index = async (req, res) => {
   try {
@@ -26,6 +28,36 @@ exports.index = async (req, res) => {
       time: new Date().toISOString(),
       message: "Whoops, failed fetching database!",
       total,
+      data: err,
+    });
+  }
+};
+
+exports.imageProcessing = async (req, res) => {
+  const { image } = req.body;
+  const image64 = image.split(",")[1];
+  const filename = stringRandom.generate(7) + "-" + new Date().toISOString();
+  const options = { filename, filePath: "./Uploads/Image/" };
+  const imageData = new Buffer.from(image64, "base64");
+
+  base64.base64decoder(imageData, options, function (err, saved) {
+    if (err) {
+      console.log(err);
+    }
+    console.log(saved);
+  });
+
+  try {
+    res.json({
+      success: true,
+      message: "Success fetching database!",
+      data: filename,
+    });
+  } catch (err) {
+    res.json({
+      success: false,
+      time: new Date().toISOString(),
+      message: "Whoops, failed fetching database!",
       data: err,
     });
   }

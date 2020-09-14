@@ -21,6 +21,7 @@ routes.post("/survey", SurveyController.store);
 routes.delete("/survey/:id", SurveyController.destroy);
 routes.get("/survey/:id", SurveyController.edit);
 routes.post("/survey/update", SurveyController.update);
+routes.post("/survey/upload-image", SurveyController.imageProcessing);
 /**
  * Export the routes
  */

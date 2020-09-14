@@ -13,7 +13,7 @@ var corsOptions = {
 const Router = require("./Router");
 db;
 
-app.use([cors(corsOptions), bodyParser.json()]);
+app.use([cors(corsOptions), bodyParser.json({ limit: "5mb" })]);
 app.use("/api", Router);
 
 app.listen(port, () => console.log(`Connected to port ${port}`));
