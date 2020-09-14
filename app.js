@@ -13,7 +13,9 @@ var corsOptions = {
 const Router = require("./Router");
 db;
 
-app.use([cors(corsOptions), bodyParser.json({ limit: "5mb" })]);
+app.use(cors(corsOptions));
+app.use(bodyParser.json({ limit: "5mb" }));
+app.use(express.static("public"));
 app.use("/api", Router);
 
 app.listen(port, () => console.log(`Connected to port ${port}`));

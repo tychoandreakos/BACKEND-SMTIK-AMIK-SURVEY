@@ -37,7 +37,7 @@ exports.imageProcessing = async (req, res) => {
   const { image } = req.body;
   const image64 = image.split(",")[1];
   const filename = stringRandom.generate(7) + "-" + new Date().toISOString();
-  const options = { filename, filePath: "./Uploads/Image/" };
+  const options = { filename, filePath: "./public/images/" };
   const imageData = new Buffer.from(image64, "base64");
 
   base64.base64decoder(imageData, options, function (err, saved) {

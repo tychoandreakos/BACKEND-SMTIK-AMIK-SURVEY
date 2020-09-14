@@ -16,12 +16,15 @@ routes.get("/store", TestingController.store);
 /**
  * Survey Manager Routes
  */
-routes.get("/survey", SurveyController.index);
-routes.post("/survey", SurveyController.store);
-routes.delete("/survey/:id", SurveyController.destroy);
+
 routes.get("/survey/:id", SurveyController.edit);
+routes.get("/survey", SurveyController.index);
+
 routes.post("/survey/update", SurveyController.update);
 routes.post("/survey/upload-image", SurveyController.imageProcessing);
+routes.post("/survey", SurveyController.store);
+
+routes.delete("/survey/:id", SurveyController.destroy);
 /**
  * Export the routes
  */
