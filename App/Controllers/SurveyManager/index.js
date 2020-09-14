@@ -46,7 +46,9 @@ exports.imageProcessing = async (req, res) => {
         success: false,
         time: new Date().toISOString(),
         message: "Whoops, failed save image!",
-        data: err,
+        data: {
+          image: err,
+        },
       });
     }
 
