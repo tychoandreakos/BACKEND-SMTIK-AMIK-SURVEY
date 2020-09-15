@@ -3,13 +3,14 @@
  * FULL URL EXPLANATION: https://www.freecodecamp.org/news/introduction-to-mongoose-for-mongodb-d2a7aa593c57/
  */
 let mongoose = require("mongoose");
+require("dotenv").config();
 
 // const uri =
 //   "mongodb+srv://danieka12:Elangindra12@survey-amik.cudnc.mongodb.net/survey-stmik-amik?retryWrites=true&w=majority";
 
-const server = "127.0.0.1:27017";
-const database = "survey-stmik";
-const localUri = `mongodb://${server}/${database}`;
+const server = process.env.DB_HOST;
+const database = process.env.DB_NAME;
+const localUri = `${process.env.DB_URI}${server}/${database}`;
 
 class Database {
   constructor() {
