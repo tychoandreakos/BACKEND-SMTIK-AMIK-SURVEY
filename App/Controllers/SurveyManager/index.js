@@ -5,30 +5,37 @@ const stringRandom = require("randomstring");
 exports.index = async (req, res) => {
   try {
     const data = await SurveyModel.find(
-      {},
-      {
-        "surveyForm.title": 0,
-        "surveyForm.description": 0,
-        "surveyForm.surveyCategoryBuilder": 0,
-      }
+      {}
+      // {
+      //   "surveyForm.title": 0,
+      //   "surveyForm.description": 0,
+      //   "surveyForm.surveyCategoryBuilder": 0,
+      // }
     )
       .limit(5)
       .sort({ createdAt: -1 });
     const total = await SurveyModel.find().countDocuments();
+    const response = 0;
     res.json({
       success: true,
       message: "Success fetching database!",
       time: new Date().toISOString(),
-      total,
-      data,
+      result: {
+        total,
+        response,
+        data,
+      },
     });
   } catch (err) {
     res.json({
       success: false,
       time: new Date().toISOString(),
       message: "Whoops, failed fetching database!",
-      total,
-      data: err,
+      result: {
+        total: 0,
+        respose: 0,
+        data: err,
+      },
     });
   }
 };
