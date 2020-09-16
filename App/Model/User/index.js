@@ -9,17 +9,13 @@ const configuration = {
 };
 
 const schema = new mongoose.Schema({
-  username: {
+  name: {
     type: String,
     required: true,
-    unique: true,
+    unique: false,
     lowercase: true,
     validate: (val) => {
-      return validator
-        .isLength(val, configuration.lengthVal)
-        .isLowerCase()
-        .trim(val)
-        .escape(val);
+      return validator.isLength(val, configuration.lengthVal);
     },
   },
   email: {
@@ -28,7 +24,7 @@ const schema = new mongoose.Schema({
     unique: true,
     lowercase: true,
     validate: (val) => {
-      return validator.isEmail(val).isLength(val, configuration.lengthVal);
+      return validator.isEmail(val);
     },
   },
   password: {
@@ -37,36 +33,51 @@ const schema = new mongoose.Schema({
     unique: false,
     lowercase: false,
     validate: (val) => {
-      return validator.trim(val).isLength(val, configuration.lengthVal);
+      return validator.isLength(val, configuration.lengthVal);
     },
   },
-  image: String,
-  jk: String,
-  name: {
-    type: String,
-    required: true,
-    lowercase: true,
-    validate: (val) => {
-      return validator.trim(val).isLength(val, configuration.lengthVal);
-    },
-    address: String,
-    phone: {
-      type: Number,
-      validate: (val) => {
-        return validator
-          .trim(val)
-          .isLength(val, configuration.lengthVal)
-          .isNumeric(val);
-      },
-    },
-    date: {
-      type: Date,
-      required: true,
-      validate: (val) => {
-        return validator.isDate(val).isLength(val, configuration.lengthVal);
-      },
-    },
+  createdAt: {
+    type: Date,
+    required: false,
   },
+  modifiedAt: {
+    type: Date,
+    required: false,
+  },
+  // image: String,
+  // jk: String,
+  // name: {
+  //   type: String,
+  //   required: false,
+  //   lowercase: true,
+  //   validate: (val) => {
+  //     return validator.trim(val).isLength(val, configuration.lengthVal);
+  //   },
+  //   address: {
+  //     type: String,
+  //     required: false,
+  //     lowercase: true,
+  //     validate: (val) => {
+  //       return validator.trim(val).isLength(val, configuration.lengthVal);
+  //     },
+  //   },
+  //   phone: {
+  //     type: Number,
+  //     validate: (val) => {
+  //       return validator
+  //         .trim(val)
+  //         .isLength(val, configuration.lengthVal)
+  //         .isNumeric(val);
+  //     },
+  //   },
+  //   date: {
+  //     type: Date,
+  //     required: true,
+  //     validate: (val) => {
+  //       return validator.isDate(val).isLength(val, configuration.lengthVal);
+  //     },
+  //   },
+  // },
 });
 
 module.exports = mongoose.model("User", schema);

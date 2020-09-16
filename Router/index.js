@@ -6,6 +6,12 @@ const routes = express.Router();
  */
 const TestingController = require("../App/Controllers/Testing");
 const SurveyController = require("../App/Controllers/SurveyManager");
+const UserController = require("../App/Controllers/User");
+
+/**
+ * Define the middleware
+ */
+const AuthMiddleware = require("../App/Middleware/auth");
 
 /**
  * Define the routes
@@ -25,6 +31,13 @@ routes.post("/survey/upload-image", SurveyController.imageProcessing);
 routes.post("/survey", SurveyController.store);
 
 routes.delete("/survey/:id", SurveyController.destroy);
+
+/**
+ * AuthController
+ */
+routes.post("/auth/signup", UserController.signup);
+routes.post("/auth/login", UserController.login);
+
 /**
  * Export the routes
  */
