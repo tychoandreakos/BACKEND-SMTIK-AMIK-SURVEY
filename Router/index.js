@@ -61,6 +61,11 @@ routes.delete(
  */
 routes.post("/auth/signup", UserController.signup);
 routes.post("/auth/login", UserController.login);
+routes.post(
+  "/auth/user",
+  AuthMiddleware.auththenticateUser,
+  UserController.fetchUser
+);
 
 /**
  * Export the routes

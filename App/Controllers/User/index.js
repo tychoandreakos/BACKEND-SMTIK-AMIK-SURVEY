@@ -3,6 +3,28 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
+exports.fetchUser = async (req, res) => {
+  const { _id } = req.body;
+  try {
+    const result = await UserModel.findOne({ _id }, { password: 0 });
+    res.json({
+      success: true,
+      message: "Success fecthing user",
+      data: {
+        result,
+      },
+      time: new Date().toISOString(),
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Failed fetching user",
+      data: err,
+      time: new Date().toISOString(),
+    });
+  }
+};
+
 exports.signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -28,7 +50,7 @@ exports.signup = async (req, res) => {
       time: new Date().toISOString(),
     });
   } catch (err) {
-    res.json({
+    res.status(500).json({
       success: false,
       message: "Failed signup",
       data: err,
@@ -61,7 +83,7 @@ exports.login = async (req, res) => {
       throw "Your credential has been rejected";
     }
   } catch (err) {
-    res.json({
+    res.status(500).json({
       success: false,
       message: "Failed login",
       data: err,
