@@ -7,7 +7,7 @@ exports.auththenticateUser = (req, res, next) => {
   if (authHeader) {
     const token = authHeader.split(" ")[1];
 
-    jwt.verify(token, process.env.ACCESS_TOKEN, (err, user) => {
+    jwt.verify(token, process.env.ACCESS_TOKEN, (err, data) => {
       if (err) {
         return res.status(403).json({
           success: false,
@@ -17,7 +17,7 @@ exports.auththenticateUser = (req, res, next) => {
         });
       }
 
-      req.user = user;
+      req.data = data;
       next();
     });
   } else {

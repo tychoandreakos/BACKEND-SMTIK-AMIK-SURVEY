@@ -23,14 +23,38 @@ routes.get("/store", TestingController.store);
  * Survey Manager Routes
  */
 
-routes.get("/survey/:id", SurveyController.edit);
-routes.get("/survey", SurveyController.index);
+routes.get(
+  "/survey/:id",
+  AuthMiddleware.auththenticateUser,
+  SurveyController.edit
+);
+routes.get(
+  "/survey",
+  AuthMiddleware.auththenticateUser,
+  SurveyController.index
+);
 
-routes.post("/survey/update", SurveyController.update);
-routes.post("/survey/upload-image", SurveyController.imageProcessing);
-routes.post("/survey", SurveyController.store);
+routes.post(
+  "/survey/update",
+  AuthMiddleware.auththenticateUser,
+  SurveyController.update
+);
+routes.post(
+  "/survey/upload-image",
+  AuthMiddleware.auththenticateUser,
+  SurveyController.imageProcessing
+);
+routes.post(
+  "/survey",
+  AuthMiddleware.auththenticateUser,
+  SurveyController.store
+);
 
-routes.delete("/survey/:id", SurveyController.destroy);
+routes.delete(
+  "/survey/:id",
+  AuthMiddleware.auththenticateUser,
+  SurveyController.destroy
+);
 
 /**
  * AuthController
