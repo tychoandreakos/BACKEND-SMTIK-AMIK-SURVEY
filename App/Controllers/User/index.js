@@ -6,7 +6,6 @@ require("dotenv").config();
 exports.signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    // console.log(req.body);
     const data = {
       name: name.toLowerCase(),
       email: email.toLowerCase(),
@@ -14,21 +13,18 @@ exports.signup = async (req, res) => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
-    console.log(data);
-    const sendDb = await new UserModel(data).save();
-    // const userFind = await UserModel().find(data);
-    // const accessToken = jwt.sign(
-    //   { username: user.username, password: user.role },
-    //   accessTokenSecret
-    // );
-    console.log(sendDb);
+    const save = await new UserModel(data).save();
+    const accessToken = jwt.sign(
+      { email: save.email, password: save.password },
+      process.env.ACCESS_TOKEN
+    );
     res.json({
       success: true,
       message: "Success signup",
-      //   data: {
-      //     _token: accessToken,
-      //   },
-      data: sendDb,
+      data: {
+        _id: save._id,
+        _token: accessToken,
+      },
       time: new Date().toISOString(),
     });
   } catch (err) {
@@ -48,7 +44,7 @@ exports.login = async (req, res) => {
     const verified = bcrypt.compareSync(password, userFind.password);
     if (verified) {
       const accessToken = jwt.sign(
-        { email: userFind.email, password },
+        { email: userFind.email, password: userFind.password },
         process.env.ACCESS_TOKEN
       );
       res.json({
