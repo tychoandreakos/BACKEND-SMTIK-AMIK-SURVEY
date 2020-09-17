@@ -3,7 +3,7 @@ const validator = require("validator");
 
 const configuration = {
   lengthVal: {
-    min: 8,
+    min: 2,
     max: undefined,
   },
 };
