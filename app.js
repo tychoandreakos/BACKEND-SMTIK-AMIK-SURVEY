@@ -6,7 +6,6 @@ const Router = require("./Router");
 
 //configration, didn't need initialization to varibable
 require("./Configuration");
-require("dotenv").config();
 
 var corsOptions = {
   origin: process.env.CLIENT,
@@ -18,6 +17,6 @@ app.use(bodyParser.json({ limit: process.env.LIMIT_TRANSFER }));
 app.use(express.static("public"));
 app.use(process.env.API_PATH, Router);
 
-app.listen(process.env.PORT, () =>
+app.listen(process.env.SERVER_PORT, () =>
   console.log(`Connected to port ${process.env.PORT}`)
 );
