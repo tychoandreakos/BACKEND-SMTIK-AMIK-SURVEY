@@ -18,5 +18,5 @@ app.use(express.static("public"));
 app.use("/api", Router);
 
 app.listen(process.env.SERVER_PORT, () =>
-  console.log(`Connected to port ${process.env.PORT}`)
+  console.log(`Connected to port ${process.env.SERVER_PORT}`)
 );
