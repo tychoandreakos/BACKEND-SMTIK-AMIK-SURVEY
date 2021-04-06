@@ -8,14 +8,14 @@ const Router = require("./Router");
 require("./Configuration");
 
 var corsOptions = {
-  origin: process.env.CLIENT,
+  origin: "*",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json({ limit: process.env.LIMIT_TRANSFER }));
 app.use(express.static("public"));
-app.use(process.env.API_PATH, Router);
+app.use("/api", Router);
 
 app.listen(process.env.SERVER_PORT, () =>
   console.log(`Connected to port ${process.env.PORT}`)
