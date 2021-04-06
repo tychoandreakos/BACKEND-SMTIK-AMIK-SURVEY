@@ -4,9 +4,6 @@
  */
 let mongoose = require("mongoose");
 
-// const uri =
-//   "mongodb+srv://danieka12:Elangindra12@survey-amik.cudnc.mongodb.net/survey-stmik-amik?retryWrites=true&w=majority";
-
 const server = process.env.DB_HOST;
 const database = process.env.DB_NAME;
 const localUri = `mongodb://${server}/${database}`;
@@ -31,16 +28,7 @@ class Database {
         console.error("Database connection error");
       });
   }
-
-  //   async _connect() {
-  //     try {
-  //       const connect = await mongoose.connect(uri);
-  //       console.log("Successfully Connected");
-  //       return await connect;
-  //     } catch {
-  //       console.log("Database connection Error");
-  //     }
-  //   }
 }
+
 
 module.exports = new Database();
